@@ -1,0 +1,41 @@
+﻿@model Forum.Models.Forum.ForumTopicModel
+
+<h1>Вітаємо до @Model.Forum.Name форуму!</h1>
+
+<span id="headingBtn">
+    @Html.ActionLink("Створити пост", "Create", "Post", new { id = Model.Forum.Id}, new {@class = "btn btn-newPost" })
+</span>
+
+@if (Model.Posts.Any())
+{
+    <table class="table table-bordered table-hover">
+        <tbody>
+            @foreach (var post in Model.Posts)
+            {
+            <tr>
+                <td>
+                    @Html.ActionLink(post.Title,"Index", "Post", new { id = post.Id}, null)
+                </td>
+                <td>
+                    @post.AuthorName
+                </td>
+                <td>
+                    @post.DatePosted
+                </td>
+                <td>
+                    @post.RepliesCount
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+else { 
+<div class="noPosts">
+    <h3>Поки що немає постів в @Model.Forum.Name <br/>
+        Чому б не @Html.ActionLink("створити", "Create", "Post", new { id = Model.Forum.Id},null) перший ?
+    </h3>
+    
+</div>
+}

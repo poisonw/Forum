@@ -1,0 +1,20 @@
+﻿@model Forum.Models.Post.NewPostModel
+
+<h1>Нове повідомлення | @Model.ForumName</h1>
+
+@using (Html.BeginForm("AddPost", null, FormMethod.Post, new { id = "addPostForm" }))
+{
+<div class="form-group">
+    @Html.LabelFor(model => model.Title) <br/>
+    @Html.EditorFor(model => model.Title, new { @class = "form-control" } )
+
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Content)<br />
+    @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+
+</div>
+
+<button type="submit" id="submitPostBtn" class="btn btn-submitPost">Відправити пост</button>
+<input type="hidden" value="@Model.ForumId" />
+}

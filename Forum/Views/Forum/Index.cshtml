@@ -1,0 +1,19 @@
+﻿@model Forum.Models.Forum.ForumIndexModel
+
+<h1>Форум</h1>
+
+<table class="table table-hover" id="forumIndexTable">
+    <tbody>
+        @foreach (var forum in Model.ForumList)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(forum.Name, "Topic" ,"Forum", new { id = forum.Id},null)
+                </td>
+                <td>
+                    @forum.Description
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,29 @@
+﻿@model Forum.Models.Post.PostIndexModel
+
+<h1>@Model.Title</h1>
+
+<div>
+    Автор: @Model.AuthorName (@Model.AuthorRating)
+    Створено: @Model.Created
+</div>
+
+<div>
+    @Model.PostContent
+</div>
+
+@if (Model.Replies.Any())
+{
+    foreach (var reply in Model.Replies)
+    {
+        <div>
+            <div>
+                Автор відповіді: @reply.AuthorName
+                Створено відповідь: @reply.Created
+            </div>
+            <div>
+                Відповідь: @reply.ReplyContent
+            </div>
+        </div>
+
+    }
+}
