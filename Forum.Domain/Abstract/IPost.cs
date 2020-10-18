@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Forum.Data.Models.ApplicationUser;
 
 namespace Forum.Domain.Abstract
 {
@@ -15,6 +16,7 @@ namespace Forum.Domain.Abstract
         IEnumerable<Post> GetPostsByForum(int id);
 
         Task Add(Post post);
+
         Task Delete(int id);
         Task EditPostContent(int id, string newContent);
     }

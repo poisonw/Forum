@@ -1,5 +1,7 @@
-﻿using Forum.Data.Models;
+﻿using Forum.Data.Context;
+using Forum.Data.Models;
 using Forum.Domain.Abstract;
+using Forum.Domain.Concrete;
 using Forum.Models.Forum;
 using Forum.Models.Post;
 using System;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using static Forum.Data.Models.ApplicationUser;
 
 namespace Forum.Controllers
 {
@@ -15,11 +18,14 @@ namespace Forum.Controllers
     {
         private readonly IMyForum _myForumService;
         private readonly IPost _postService;
+        
 
-        public ForumController(IMyForum myForumService, IPost postService)
+        public ForumController(IMyForum myForumService)
+        
         {
             _myForumService = myForumService;
-            _postService = postService;
+           // _postService = postService;
+            
         }
 
 
@@ -79,5 +85,8 @@ namespace Forum.Controllers
                 ImageUrl = forum.ImageUrl
             };
         }
+
+
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Forum.Data.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using static Forum.Data.Models.ApplicationUser;
 
 namespace Forum.Data.Context
 {
@@ -10,11 +11,11 @@ namespace Forum.Data.Context
     : base("DefaultConnection",throwIfV1Schema: false)
         {
         }
-       // public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<MyForum> MyForums { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostReply> PostReplies { get; set; }
-          public static ApplicationDbContext Create()
+
+        public static ApplicationDbContext Create()
         {
           return new ApplicationDbContext();
          }

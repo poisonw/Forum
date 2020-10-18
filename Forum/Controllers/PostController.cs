@@ -1,15 +1,17 @@
-﻿using Forum.Data.Models;
+﻿using Forum.Data.Context;
+using Forum.Data.Models;
 using Forum.Domain.Abstract;
 using Forum.Models.Post;
 using Forum.Models.Reply;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-
+using static Forum.Data.Models.ApplicationUser;
 
 namespace Forum.Controllers
 {
@@ -18,11 +20,15 @@ namespace Forum.Controllers
         private readonly IPost _postservice;
         private readonly IMyForum _myForumService;
        private static UserManager<ApplicationUser> _userManager;
+       
+
         public PostController(IPost postService, IMyForum myForumService, UserManager<ApplicationUser> userManager)
         {
             _postservice = postService;
             _myForumService = myForumService;
-            _userManager = userManager;
+             
+            _userManager = userManager;//new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this._applicationDbContext));
+            
         }
 
         public ActionResult Index(int id)
@@ -61,7 +67,7 @@ namespace Forum.Controllers
         public async Task<ActionResult> AddPost(NewPostModel model)
         {
             var userId = User.Identity.GetUserId();
-           var user = await _userManager.FindByIdAsync(userId);
+            var user =  await _userManager.FindByIdAsync(userId);
             var post = BuildPost(model, user);
             await _postservice.Add(post);
             return RedirectToAction("Index", "Post", new { id = post.Id });

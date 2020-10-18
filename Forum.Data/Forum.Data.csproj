@@ -54,21 +54,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
-    <Compile Include="Migrations\202010072036410_InitialCreate.cs" />
-    <Compile Include="Migrations\202010072036410_InitialCreate.Designer.cs">
-      <DependentUpon>202010072036410_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202010131802195_Add models.cs" />
+    <Compile Include="Migrations\202010131802195_Add models.Designer.cs">
+      <DependentUpon>202010131802195_Add models.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010101607013_Del col.cs" />
-    <Compile Include="Migrations\202010101607013_Del col.Designer.cs">
-      <DependentUpon>202010101607013_Del col.cs</DependentUpon>
+    <Compile Include="Migrations\202010131808509_Add col.cs" />
+    <Compile Include="Migrations\202010131808509_Add col.Designer.cs">
+      <DependentUpon>202010131808509_Add col.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010171837026_NewContext.cs" />
+    <Compile Include="Migrations\202010171837026_NewContext.Designer.cs">
+      <DependentUpon>202010171837026_NewContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010171901489_NewContext1.cs" />
+    <Compile Include="Migrations\202010171901489_NewContext1.Designer.cs">
+      <DependentUpon>202010171901489_NewContext1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010171922531_AddKey.cs" />
+    <Compile Include="Migrations\202010171922531_AddKey.Designer.cs">
+      <DependentUpon>202010171922531_AddKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010172140155_DelConstruktor.cs" />
+    <Compile Include="Migrations\202010172140155_DelConstruktor.Designer.cs">
+      <DependentUpon>202010172140155_DelConstruktor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010172142108_DeLFK.cs" />
+    <Compile Include="Migrations\202010172142108_DeLFK.Designer.cs">
+      <DependentUpon>202010172142108_DeLFK.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\MyForum.cs" />
-    <Compile Include="Models\Post.cs" />
-    <Compile Include="Models\PostReply.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,11 +92,26 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010072036410_InitialCreate.resx">
-      <DependentUpon>202010072036410_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010131802195_Add models.resx">
+      <DependentUpon>202010131802195_Add models.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202010101607013_Del col.resx">
-      <DependentUpon>202010101607013_Del col.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010131808509_Add col.resx">
+      <DependentUpon>202010131808509_Add col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010171837026_NewContext.resx">
+      <DependentUpon>202010171837026_NewContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010171901489_NewContext1.resx">
+      <DependentUpon>202010171901489_NewContext1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010171922531_AddKey.resx">
+      <DependentUpon>202010171922531_AddKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010172140155_DelConstruktor.resx">
+      <DependentUpon>202010172140155_DelConstruktor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010172142108_DeLFK.resx">
+      <DependentUpon>202010172142108_DeLFK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

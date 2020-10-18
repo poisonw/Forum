@@ -7,10 +7,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Forum.Data.Models.ApplicationUser;
 
 namespace Forum.Domain.Concrete
 {
-    public class MyForumService : IMyForum
+    public class MyForumService : IMyForum , IDisposable
     {
         private readonly ApplicationDbContext _context;
         public MyForumService(ApplicationDbContext context)
@@ -26,6 +27,8 @@ namespace Forum.Domain.Concrete
         {
             throw new NotImplementedException();
         }
+
+
 
         public IEnumerable<MyForum> GetAll()
         {
@@ -56,5 +59,25 @@ namespace Forum.Domain.Concrete
         {
             throw new NotImplementedException();
         }
+
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
+
 }

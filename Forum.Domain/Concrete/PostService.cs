@@ -5,21 +5,26 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using static Forum.Data.Models.ApplicationUser;
 
 namespace Forum.Domain.Concrete
 {
-    public class PostService : IPost
+    public class PostService : IPost, IDisposable
     {
         private readonly ApplicationDbContext _context;
         public PostService(ApplicationDbContext context)
         {
             _context = context;
         }
-        public Task Add(Post post)
+        public async Task Add(Post post)
         {
-            throw new NotImplementedException();
+            _context.Posts.Add(post);
+          await  _context.SaveChangesAsync();
+            
+           
+            
+  
         }
 
         public Task Delete(int id)
@@ -39,11 +44,12 @@ namespace Forum.Domain.Concrete
 
         public Post GetById(int id)
         {
-            return _context.Posts.Where(p => p.Id == id)
+            var res = _context.Posts.Where(p => p.Id == id)
                 .Include(p => p.User)
                 .Include(p => p.Replies.Select(r => r.User))
                 .Include(p => p.MyForum)
                 .First();
+            return (res);
         }
 
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)
@@ -56,6 +62,25 @@ namespace Forum.Domain.Concrete
             return _context.MyForums
                 .Where(f => f.Id == id).First()
                 .Posts;
+        }
+
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
