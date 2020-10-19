@@ -1,7 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
@@ -13,29 +16,58 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                @Html.ActionLink("FlintForum", "Index", "Home", new { area = "" }, new { @class = "nav navbar-brand navLogo" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Информация", "About", "Home")</li>
-                    <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
+                    <li>
+                        @Html.ActionLink("Форуми", "Index", "Forum")
+                    </li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Налаштування<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Профіль</li>
+                                <li> @Html.ActionLink("Мій профіль", "Detail", "Profile")</li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Адмін</li>
+                                    <li>@Html.ActionLink("Створити форум", "Create", "Forum")</li>
+                                    <li>@Html.ActionLink("Всі користувачі", "Index", "Profile")</li>
+                                }
+                            </ul>
+                        </li>
+                    }
                 </ul>
+                @if (!Request.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Вхід", "Login", "Account")</li>
+                        <li class="active">@Html.ActionLink("Реєстрація", "Register", "Account")</li>
+                    </ul>
+                }
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, htmlAttributes: new { id = "logoutForm", @class = "navbar" }) )
+                    {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>Привіт, @User.Identity.Name</li>
+                        <li class="active">@Html.ActionLink("Вихід", "Logout", "Account")</li>
+                    </ul>
+                    }
+                }
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
-        </footer>
+
     </div>
 
     @Scripts.Render("~/bundles/jquery")

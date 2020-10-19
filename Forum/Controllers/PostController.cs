@@ -27,7 +27,7 @@ namespace Forum.Controllers
             _postservice = postService;
             _myForumService = myForumService;
              
-            _userManager = userManager;//new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this._applicationDbContext));
+            _userManager = userManager;
             
         }
 

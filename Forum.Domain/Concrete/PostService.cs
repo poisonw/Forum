@@ -39,7 +39,10 @@ namespace Forum.Domain.Concrete
 
         public IEnumerable<Post> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Posts
+                .Include(p => p.User)
+                .Include(p => p.Replies.Select(r => r.User))
+                .Include(p => p.MyForum);
         }
 
         public Post GetById(int id)
@@ -81,6 +84,11 @@ namespace Forum.Domain.Concrete
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public IEnumerable<Post> GetLatestPosts(int n)
+        {
+            return GetAll().OrderByDescending(post => post.Created).Take(n);
         }
     }
 }
