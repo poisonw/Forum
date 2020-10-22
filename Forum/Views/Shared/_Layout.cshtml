@@ -10,14 +10,21 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Site.css" rel="stylesheet">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icon" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
 
-                @Html.ActionLink("FlintForum", "Index", "Home", new { area = "" }, new { @class = "nav navbar-brand navLogo" })
+                @Html.ActionLink(" ", "Index", "Home",null, htmlAttributes: new { @class = "navbar-brand navLogo"})
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -52,16 +59,18 @@
                 }
                 @if (Request.IsAuthenticated)
                 {
-                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, htmlAttributes: new { id = "logoutForm", @class = "navbar" }) )
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, htmlAttributes: new { id = "logoutForm", @class = "navbar-right" }))
                     {
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>Привіт, @User.Identity.Name</li>
-                        <li class="active">@Html.ActionLink("Вихід", "Logout", "Account")</li>
-                    </ul>
+                        @Html.AntiForgeryToken()
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a>Вітаємо, @User.Identity.GetUserName()</a>
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Вихід</a></li>
+                            
+                        </ul>
                     }
                 }
-
-                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>

@@ -219,6 +219,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\forum\icon_c#.png" />
+    <Content Include="images\forum\icon_js.png" />
+    <Content Include="images\forum\icon_phyton.png" />
+    <Content Include="images\theme\background.jpg" />
+    <Content Include="images\theme\front-splash.jpg" />
+    <Content Include="images\theme\logo.png" />
+    <Content Include="images\users\user1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

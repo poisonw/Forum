@@ -3,12 +3,12 @@
 <div class="container body-content">
     <div class="row frontPageSplash">
         <div class="col-md-6 frontPageLearn">
-            <div class="fronPageHeading">Навчатися, співпрацювати, ділитися знаннями</div>
+            <div class="frontPageHeading">Навчатися, співпрацювати, ділитися знаннями</div>
             <p class="frontPageSubHeading"> FlintForum - швидко розвиваючий форум по програмуванню</p>
             <div>
-                @using (Html.BeginForm("Search","Search",FormMethod.Post))
+                @using (Html.BeginForm("Search", "Search", FormMethod.Post))
                 {
-                   <input type="text" value="SearchQuery" class="homeSearch" placeholder="Знайти..."/>
+                    <input type="text" class="homeSearch" placeholder="Знайти..." />
                 }
             </div>
         </div>
@@ -18,30 +18,34 @@
         <h3 id="latestPosts">Останні повідомлення</h3>
         <table class="table table-hover" id="latestPostsTable">
             <tbody>
-                @foreach (var post in @Model.LatestPosts)
+                @foreach (var post in Model.LatestPosts)
                 {
-                    <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl); background-size=100%"></div>
-                    <div class="postTitle">
-                        @Html.ActionLink(@post.Title,"Index", "Post", new { id = @post.Id})
-                    </div>
-                    <div class="postSubTitle">
-                        @if (post.RepliesCount == 1)
-                        {
-                            <span>@post.RepliesCount Відповідь</span>
-                        }
-                        @if (post.RepliesCount == 0)
-                        {
-                            <span>Немає відповідей</span>
-                        }
-                        else
-                        {
-                            <span>@post.RepliesCount Відповіді(-ей)</span>
-                        }
-                    <span class="postUser">
-                        @Html.ActionLink(@post.Title, "Detail", "Profile", new { id = @post.AuthorId })
-                        @post.AuthorName
-                    </span>
-                    </div>
+                    <tr>
+                        <td>
+                            <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl)"></div>
+                            <div class="postTitle">
+                               <a> @Html.ActionLink(@post.Title, "Index", "Post", new { id = @post.Id}, null ) </a>
+                            </div>
+                            <div class="postSubTitle">
+                                @if (post.RepliesCount == 1)
+                                {
+                                    <span>@post.RepliesCount Відповідь</span>
+                                }
+                                @if (post.RepliesCount == 0)
+                                {
+                                    <span>Немає відповідей</span>
+                                }
+                                else
+                                {
+                                    <span>@post.RepliesCount Відповіді(-ей)</span>
+                                }
+                                <span class="postUser">
+                                    @Html.ActionLink(@post.AuthorName, "Detail", "Profile", new { id = @post.AuthorId })
+                                    
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
