@@ -22,9 +22,9 @@
                 {
                     <tr>
                         <td>
-                            <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl)"></div>
+                            <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl);"></div>
                             <div class="postTitle">
-                               <a> @Html.ActionLink(@post.Title, "Index", "Post", new { id = @post.Id}, null ) </a>
+                                @Html.ActionLink(@post.Title, "Index", "Post", new { id = @post.Id}, null ) 
                             </div>
                             <div class="postSubTitle">
                                 @if (post.RepliesCount == 1)

@@ -87,6 +87,10 @@
     <Compile Include="Migrations\202010201151320_Change models.Designer.cs">
       <DependentUpon>202010201151320_Change models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010221547417_Add ForumId in Post.cs" />
+    <Compile Include="Migrations\202010221547417_Add ForumId in Post.Designer.cs">
+      <DependentUpon>202010221547417_Add ForumId in Post.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\MyForum.cs" />
@@ -122,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010201151320_Change models.resx">
       <DependentUpon>202010201151320_Change models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010221547417_Add ForumId in Post.resx">
+      <DependentUpon>202010221547417_Add ForumId in Post.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

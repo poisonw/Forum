@@ -1,41 +1,99 @@
 ﻿@model Forum.Models.Forum.ForumTopicModel
 
-<h1>Вітаємо до @Model.Forum.Name форуму!</h1>
-
-<span id="headingBtn">
-    @Html.ActionLink("Створити пост", "Create", "Post", new { id = Model.Forum.Id}, new {@class = "btn btn-newPost" })
-</span>
-
-@if (Model.Posts.Any())
-{
-    <table class="table table-bordered table-hover">
-        <tbody>
-            @foreach (var post in Model.Posts)
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            <span>@Model.Forum.Name Forum</span>
+            @if (Context.User.Identity.IsAuthenticated)
             {
-            <tr>
-                <td>
-                    @Html.ActionLink(post.Title,"Index", "Post", new { id = post.Id}, null)
-                </td>
-                <td>
-                    @post.AuthorName
-                </td>
-                <td>
-                    @post.DatePosted
-                </td>
-                <td>
-                    @post.RepliesCount
-                </td>
-            </tr>
+                <span id="headingBtn">
+                    @Html.ActionLink("Створити повідомлення", "Create", "Post", new { id = Model.Forum.Id }, htmlAttributes: new { @class = "btn btn-newPost" })
+                </span>
             }
-        </tbody>
-    </table>
-}
+            @using (Html.BeginForm("Search", "Forum", FormMethod.Post))
+            {
+                <div class="searchForm">
+                 <input name="SearchQuery" type="text" placeholder="Пошук..." class="searchBar" onfocus="clearThis(this)"/>
 
-else { 
-<div class="noPosts">
-    <h3>Поки що немає постів в @Model.Forum.Name <br/>
-        Чому б не @Html.ActionLink("створити", "Create", "Post", new { id = Model.Forum.Id},null) перший ?
-    </h3>
-    
+                    <button type="submit" class="btn buttonSearch">
+                        <i class="material-icons">search</i>
+                    </button>
+                </div>
+                @Html.HiddenFor(forum => forum.Forum.Id)
+                
+            }
+        </div>
+        <div class="sectionDescription">
+            <div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl)"></div>
+            <p>Вітаємо у @Model.Forum.Name форумі. Будь-ласка, зберігайте дружелюбність та актуальність в повідомленнях.</p>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <p>
+                    <span>
+                        Тільки
+                        @Html.ActionLink("зареєстровані","Register", "Account") 
+                        користувачі можуть створювати нові повідомлення.
+                    </span>
+                </p>
+            }
+        </div>
+    </div>
+    <div class="row forumIndexContent">
+        @if (Model.Posts.Any())
+        {
+            <table class="table table-hover table-bordered" id="forumIndexTable">
+                <tbody>
+                    @foreach (var post in Model.Posts)
+                    {
+                        <tr>
+                            <td>
+                                <div class="postData">
+                                    <div class="postTitle">
+                                        @Html.ActionLink(post.Title, "Index", "Post", new { id = @post.Id})
+                                    </div>
+                                    <div class="forumSubTitle">
+                                        <div>
+                                            <span class="postAuthor">
+                                                @Html.ActionLink(post.AuthorName, "Detail", "Profile", new { id = @post.AuthorId })
+                                            </span>
+                                            (@post.AuthorRating) на
+                                            <span class="postDate">
+                                                @post.DatePosted
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="forumPostCount">
+                                    Відповіді: @post.RepliesCount
+                                </div>
+                            </td>
+                            <td>
+                                <div class="postDate">@post.DatePosted</div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="noPosts">
+                <i class="material-icons md-72">Питання_відповідь</i>
+                <h3>
+                    Схоже, повідомлень не знайдено.
+                    Чому б не опублікувати 
+                    @Html.ActionLink("повідомлення", "Create", "Post", new { id = @Model.Forum.Id}) ?
+                </h3>
+            </div>
+        }
+    </div>
 </div>
-}
+
+<script>
+    function clearThis(target) {
+        target.value = "";
+    }
+</script>
+

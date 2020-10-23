@@ -1,29 +1,75 @@
 ﻿@model Forum.Models.Post.PostIndexModel
 
-<h1>@Model.Title</h1>
+<div class="container body-content">
+    <div class="row postHeader">
+        <div class="postHeading">
+            <span class="postIndexTitle">
+                @Model.Title
+            </span>
+            <span id="headingBtn">
+                @Html.ActionLink("Повернутись до " + @Model.ForumName, "Topic", "Forum", new { id = @Model.ForumId }, htmlAttributes: new { @class = "btn btn-back" })
+            </span>
+        </div>
+    </div>
 
-<div>
-    Автор: @Model.AuthorName (@Model.AuthorRating)
-    Створено: @Model.Created
-</div>
 
-<div>
-    @Model.PostContent
-</div>
+    <div class="row" id="postIndexContent">
+        <div class="col-md-3 postAuthorContainer">
+            <div class="postAuthorImage" style="background-image:url(@Model.AuthorImageUrl);"></div>
 
-@if (Model.Replies.Any())
-{
-    foreach (var reply in Model.Replies)
-    {
-        <div>
-            <div>
-                Автор відповіді: @reply.AuthorName
-                Створено відповідь: @reply.Created
-            </div>
-            <div>
-                Відповідь: @reply.ReplyContent
+            @Html.ActionLink(Model.AuthorName, "Detail", "Profile", new { id = Model.AuthorId })
+            <br />
+            <span class="postData">@Model.Created</span>
+
+            @if (Model.IsAuthorAdmin)
+            {
+                <span class="isAdmin smaller">Admin</span>
+            }
+        </div>
+        <div class="col-md-9 postContentContainer">
+            <div class="postContent">
+                @Html.Raw(Model.PostContent)
             </div>
         </div>
-
+    </div>
+    <div class="row" id="replyDivider"></div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <span>
+                @Html.ActionLink("Відповідь", "Create", "Reply", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-newReply" })
+            </span>
+        </div>
     }
-}
+
+    @if (Model.Replies.Any())
+    {
+        foreach (var reply in Model.Replies)
+        {
+            <div class="row replyContent">
+                <div class="col-md-3 replyAuthorContainer">
+                    <div class="postAuthorImage" style="background-image: url(@reply.AuthorImageUrl)"></div>
+                    @Html.ActionLink(reply.AuthorName, "Detail", "Profile", new { id = @reply.AuthorId })
+                    @if (reply.IsAuthorAdmin)
+                    {
+                        <div class="isAdmin smaller">Admin</div>
+                        <br />
+                    }
+                    <span>@reply.Created</span>
+                </div>
+                <div class="col-md-9 replyContentContainer">
+                    <div class="postContent">
+                        @Html.Raw(reply.ReplyContent)
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="noPosts">
+            На це повідомлення немає відповідей. <br />
+        </div>
+    }
+
+</div>

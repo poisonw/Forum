@@ -12,6 +12,7 @@ namespace Forum.Data.Models
         public string Content { get; set; }
         public DateTime Created { get; set; }
         public string UserId { get; set; }
+        public int MyForumId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
         public virtual MyForum MyForum { get; set; }
