@@ -8,7 +8,7 @@
             <div>
                 @using (Html.BeginForm("Search", "Search", FormMethod.Post))
                 {
-                    <input type="text" class="homeSearch" placeholder="Знайти..." />
+                    <input type="text" class="homeSearch" placeholder="Знайти..." name="Search" value="SearchQuery"/>
                 }
             </div>
         </div>
@@ -24,7 +24,7 @@
                         <td>
                             <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl);"></div>
                             <div class="postTitle">
-                                @Html.ActionLink(@post.Title, "Index", "Post", new { id = @post.Id}, null ) 
+                                @Html.ActionLink(@post.Title, "Index", "Post", new { id = @post.Id},null ) 
                             </div>
                             <div class="postSubTitle">
                                 @if (post.RepliesCount == 1)

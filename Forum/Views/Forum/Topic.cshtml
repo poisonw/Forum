@@ -13,15 +13,18 @@
             @using (Html.BeginForm("Search", "Forum", FormMethod.Post))
             {
                 <div class="searchForm">
-                 <input name="SearchQuery" type="text" placeholder="Пошук..." class="searchBar" onfocus="clearThis(this)"/>
-
-                    <button type="submit" class="btn buttonSearch">
+                 <input name="SearchQuery" type="text" placeholder="Пошук..." class="searchBar" 
+                        style="padding: 3px 5px 2px 12px; margin: 8px; background-color: #333; width: 10%; transition: ease 0.3s; border: none; "  onfocus="clearThis(this)"/>
+                     <button type="submit" class="btn btn-forumSearch" style="
+ background: none !important; border: none; padding: 0 !important; font: inherit; ">
                         <i class="material-icons">search</i>
                     </button>
                 </div>
-                @Html.HiddenFor(forum => forum.Forum.Id)
+                <input type="hidden" name="id" value="@Model.Forum.Id"/>
                 
             }
+
+            
         </div>
         <div class="sectionDescription">
             <div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl)"></div>
@@ -49,7 +52,7 @@
                             <td>
                                 <div class="postData">
                                     <div class="postTitle">
-                                        @Html.ActionLink(post.Title, "Index", "Post", new { id = @post.Id})
+                                        @Html.ActionLink(@post.Title, "Index", "Post", new { id = @post.Id}, null)
                                     </div>
                                     <div class="forumSubTitle">
                                         <div>

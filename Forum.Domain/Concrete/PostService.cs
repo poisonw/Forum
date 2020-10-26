@@ -55,9 +55,13 @@ namespace Forum.Domain.Concrete
             return (res);
         }
 
-        public IEnumerable<Post> GetFilteredPosts(string searchQuery)
+        public IEnumerable<Post> GetFilteredPosts(MyForum forum, string searchQuery)
         {
-            throw new NotImplementedException();
+            
+            return string.IsNullOrEmpty(searchQuery)
+                ? forum.Posts
+                : forum.Posts.Where(post => post.Title.Contains(searchQuery)
+                || post.Content.Contains(searchQuery));
         }
 
         public IEnumerable<Post> GetPostsByForum(int id)
