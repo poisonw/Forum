@@ -1,0 +1,88 @@
+﻿@model Forum.Models.Search.SearchResultModel
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            <span>Результат пошуку по: @Model.SearchQuery</span>
+            @using (Html.BeginForm("Search", "Search", FormMethod.Post))
+            {
+                <div class="searchForm">
+                    <input name="SearchQuery" type="text" placeholder="Пошук..." class="searchBar"
+                           style="padding: 3px 5px 2px 12px; margin: 8px; background-color: #333; width: 10%; transition: ease 0.3s; border: none; " onfocus="clearThis(this)" />
+                    <button type="submit" class="btn btn-forumSearch" style="
+ background: none !important; border: none; padding: 0 !important; font: inherit; ">
+                        <i class="material-icons">search</i>
+                    </button>
+                </div>
+                
+
+            }
+
+
+        </div>
+    </div>
+    <div class="row forumIndexContent">
+        @if (!Model.EmptySearchResults)
+        {
+            <table class="table table-hover table-bordered" id="searchIndexTable">
+                <tbody>
+                    @foreach (var post in Model.Posts)
+                    {
+                        <tr>
+                            <td>
+                                
+                                <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl)"></div>
+                                <div class="postData">
+                                    <div class="postTitle">
+                                        @Html.ActionLink(@post.Title, "Index", "Post", new { id = @post.Id }, null)
+                                    </div>
+                                    <div class="forumSubTitle">
+                                        <div>
+                                            ким:
+                                            <span class="postAuthor">
+                                                @Html.ActionLink(post.AuthorName, "Detail", "Profile", new { id = @post.AuthorId })
+                                            </span>
+                                            (@post.AuthorRating) в
+                                            <span class="postForum">
+                                                @Html.ActionLink(post.Forum.Name,"Topic","Forum", new { id = post.Forum.Id})
+                                            </span>
+                                            на:
+                                            <span class="postDate">
+                                            @post.DatePosted    
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="forumPostCount">
+                                    Відповіді: @post.RepliesCount
+                                </div>
+                            </td>
+                            <td>
+                                <div class="postDate">@post.DatePosted</div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="noPosts">
+                <i class="material-icons md-72">Питання_відповідь</i>
+                <h3>
+                      Немає результатів по @Model.SearchQuery <br/>
+                </h3>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function clearThis(target) {
+        target.value = "";
+    }
+</script>
+
+

@@ -94,5 +94,12 @@ namespace Forum.Domain.Concrete
         {
             return GetAll().OrderByDescending(post => post.Created).Take(n);
         }
+
+        public IEnumerable<Post> GetFilteredPosts(string searchQuery)
+        {
+            return GetAll().Where(post
+                => post.Title.Contains(searchQuery)
+                || post.Content.Contains(searchQuery));
+        }
     }
 }
