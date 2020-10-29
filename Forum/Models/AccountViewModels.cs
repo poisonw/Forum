@@ -49,16 +49,16 @@ namespace Forum.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Адрес электронной почты")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Назва користувача")]
+        
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
-        [Display(Name = "Запомнить меня")]
+        [Display(Name = "Запамятати мене")]
         public bool RememberMe { get; set; }
     }
 
@@ -79,6 +79,11 @@ namespace Forum.Models
         [Display(Name = "Подтверждение пароля")]
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
+
+                [Required]
+        [StringLength(20, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 3)]
+        [Display(Name = "Назва користувача")]
+        public string UserName { get; set; }
     }
 
     public class ResetPasswordViewModel

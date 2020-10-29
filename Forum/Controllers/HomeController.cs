@@ -1,4 +1,5 @@
-﻿using Forum.Data.Models;
+﻿using Forum.Data;
+using Forum.Data.Models;
 using Forum.Domain.Abstract;
 using Forum.Models.Forum;
 using Forum.Models.Home;
@@ -18,16 +19,19 @@ namespace Forum.Controllers
     {
         private readonly IPost _postService;
         private readonly UserManager<ApplicationUser> _userManager;
-       // private readonly SignInManager<ApplicationUser,> _signInManager;
+        // private readonly SignInManager<ApplicationUser,> _signInManager;
+        
+
         public HomeController(IPost postService, UserManager<ApplicationUser> userManager)
         {
             _postService = postService;
             _userManager = userManager;
-
+           
         }
 
         public ActionResult Index()
         {
+            
             var model = BuildHomeIndexModel();
             return View(model);
         }

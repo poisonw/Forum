@@ -10,12 +10,10 @@
                     <input name="SearchQuery" type="text" placeholder="Пошук..." class="searchBar"
                            style="padding: 3px 5px 2px 12px; margin: 8px; background-color: #333; width: 10%; transition: ease 0.3s; border: none; " onfocus="clearThis(this)" />
                     <button type="submit" class="btn btn-forumSearch" style="
- background: none !important; border: none; padding: 0 !important; font: inherit; ">
+                          background: none !important; border: none; padding: 0 !important; font: inherit; ">
                         <i class="material-icons">search</i>
                     </button>
                 </div>
-                
-
             }
 
 
@@ -40,13 +38,13 @@
                                         <div>
                                             ким:
                                             <span class="postAuthor">
-                                                @Html.ActionLink(post.AuthorName, "Detail", "Profile", new { id = @post.AuthorId })
+                                                @Html.ActionLink(@post.AuthorName, "Detail", "Profile", new { id = @post.AuthorId }, null)
                                             </span>
                                             (@post.AuthorRating) в
                                             <span class="postForum">
-                                                @Html.ActionLink(post.Forum.Name,"Topic","Forum", new { id = post.Forum.Id})
+                                                @Html.ActionLink(@post.Forum.Name,"Topic","Forum", new { id = @post.Forum.Id}, null)
                                             </span>
-                                            на:
+                                            о:
                                             <span class="postDate">
                                             @post.DatePosted    
                                             </span>
@@ -70,9 +68,9 @@
         else
         {
             <div class="noPosts">
-                <i class="material-icons md-72">Питання_відповідь</i>
+                <i class="material-icons md-72">question_answer</i>
                 <h3>
-                      Немає результатів по @Model.SearchQuery <br/>
+                      Немає результатів по "@Model.SearchQuery" <br/>
                 </h3>
             </div>
         }

@@ -12,7 +12,7 @@ namespace Forum.Domain.Abstract
     {
         MyForum GetById(int id);
         IEnumerable<MyForum> GetAll();
-        IEnumerable<ApplicationUser> GetAllActiveUsers();
+       // IEnumerable<ApplicationUser> GetAllActiveUsers();
 
         Task Create(MyForum myForum);
         Task Delete(int myForumId);

@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using Forum.Data;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(Forum.Startup))]
@@ -8,7 +9,10 @@ namespace Forum
     {
         public void Configuration(IAppBuilder app)
         {
+            
             ConfigureAuth(app);
+            
+            
         }
     }
 }

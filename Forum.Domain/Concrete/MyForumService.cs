@@ -36,7 +36,7 @@ namespace Forum.Domain.Concrete
              return _context.MyForums.Include(f => f.Posts);
         }
 
-        public IEnumerable<ApplicationUser> GetAllActiveUsers()
+        public IEnumerable<ApplicationUserService> GetAllActiveUsers()
         {
             throw new NotImplementedException();
         }

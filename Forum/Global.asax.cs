@@ -1,3 +1,4 @@
+using Forum.Data;
 using Forum.Data.Context;
 using Forum.Data.Models;
 using Forum.Domain.Abstract;
@@ -30,7 +31,7 @@ namespace Forum
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
 
-           // NinjectModule registrations = new NinjectRegistrations();
+
             var kernel = new StandardKernel();
            var ninjectResolver = new NinjectDependencyResolver(kernel);
            DependencyResolver.SetResolver(ninjectResolver);
@@ -38,12 +39,16 @@ namespace Forum
             kernel.Bind<IMyForum>().To<MyForumService>();
             
            kernel.Bind<ApplicationDbContext>().ToSelf().InSingletonScope();
-           //  kernel.Bind<IUserStore<ApplicationUser>>().To<UserStore<ApplicationUser>>();
+         
            kernel.Bind<IUserStore<ApplicationUser>>().To<UserStore<ApplicationUser>>().WithConstructorArgument("context", kernel.Get<ApplicationDbContext>());
            kernel.Bind<UserManager<ApplicationUser>>().ToSelf();
-            //DependencyResolver.SetResolver(new Ninject.NinjectDependencyResolver(kernel));
-            //DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+
            kernel.Unbind<ModelValidatorProvider>();
+            kernel.Bind<IApplicationUser>().To<ApplicationUserService>();
+          //  kernel.Bind<IUpload>().To<UploadService>();
+            
+            
+
         }
     }
 }
