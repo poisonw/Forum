@@ -37,7 +37,7 @@
                             <ul class="dropdown-menu">
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Профіль</li>
-                                <li> @Html.ActionLink("Мій профіль", "Detail", "Profile")</li>
+                                <li> @Html.ActionLink("Мій профіль", "Detail", "Profile", new { id = User.Identity.GetUserId()},null)</li>
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li role="separator" class="divider"></li>

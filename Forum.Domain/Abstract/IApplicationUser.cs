@@ -11,7 +11,7 @@ namespace Forum.Domain.Abstract
     {
         ApplicationUser GetById(string id);
         IEnumerable<ApplicationUser> GetAll();
-        Task SetProfileImage(string id, Uri uri);
+        Task SetProfileImage(string id, string uri);
         Task IncrementRating(string id, Type type);
     }
 }

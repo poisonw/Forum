@@ -3,6 +3,7 @@ using Forum.Data.Models;
 using Forum.Domain.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,11 +33,12 @@ namespace Forum.Domain.Concrete
             throw new NotImplementedException();
         }
 
-        public async Task SetProfileImage(string id, Uri uri)
+        public async Task SetProfileImage(string id, string uri)
         {
+            
             var user = GetById(id);
-            user.ProfileImageUrl = uri.AbsoluteUri;
-            //_context.Update(user);
+            user.ProfileImageUrl = uri;
+            _context.Users.AddOrUpdate(user);
             await _context.SaveChangesAsync();
         }
     }

@@ -3,8 +3,8 @@ using Forum.Domain.Abstract;
 using Forum.Models.ApplicationUser;
 using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,6 +15,7 @@ namespace Forum.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IApplicationUser _userService;
         private readonly IUpload _uploadService;
+        
         public ProfileController(UserManager<ApplicationUser> userManager, IApplicationUser userService, IUpload uploadService)
         {
             _userManager = userManager;
@@ -22,7 +23,7 @@ namespace Forum.Controllers
             _uploadService = uploadService;
         }
 
-        // GET: Profile
+        
         public ActionResult Detail(string id)
         {
             var user = _userService.GetById(id);
@@ -39,5 +40,25 @@ namespace Forum.Controllers
             };
             return View(model);
         }
+
+        [HttpPost]
+      public async Task<ActionResult> UploadProfileImage(HttpPostedFileBase file)
+       {
+            var userId = User.Identity.GetUserId();
+            
+            if (file != null)
+            {
+                var imageUri = "/images/users/" + file.FileName;              
+                var path = Server.MapPath("~" + imageUri);
+                file.SaveAs(path);
+                
+                await _userService.SetProfileImage(userId, imageUri);
+            }
+
+            
+
+            return RedirectToAction("Detail", "Profile", new { id = userId});
+        }
     }
+
 }
