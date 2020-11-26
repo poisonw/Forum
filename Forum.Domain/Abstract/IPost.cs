@@ -21,5 +21,7 @@ namespace Forum.Domain.Abstract
 
         Task Delete(int id);
         Task EditPostContent(int id, string newContent);
+
+        Task AddReply(PostReply reply);
     }
 }

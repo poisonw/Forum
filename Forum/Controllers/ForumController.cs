@@ -7,6 +7,7 @@ using Forum.Models.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -78,6 +79,28 @@ namespace Forum.Controllers
         public ActionResult Search(int id, string searchQuery)
         {
             return RedirectToAction("Topic", "Forum", new { id, searchQuery});
+        }
+
+        public ActionResult Create()
+        {
+            var model = new AddForumModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddForum(AddForumModel model)
+        {
+            var imageUri = "/images/users/default.png";
+
+            var forum = new MyForum
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Created = DateTime.Now,
+                ImageUrl = imageUri
+            };
+            await _myForumService.Create(forum);
+            return RedirectToAction("Index", "Forum");
         }
 
         private ForumListingModel BuildForumListing(Post post)

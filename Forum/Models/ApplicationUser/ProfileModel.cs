@@ -14,7 +14,7 @@ namespace Forum.Models.ApplicationUser
         public string UserRating { get; set; }
         public string ProfileImageUrl { get; set; }
         public DateTime MemeberSince { get; set; }
-        public IFormFile ImageUpload { get; set; }
+        public HttpPostedFileBase ImageUpload { get; set; }
         public bool IsAdmin { get; set; }
 
     }

@@ -101,5 +101,11 @@ namespace Forum.Domain.Concrete
                 => post.Title.Contains(searchQuery)
                 || post.Content.Contains(searchQuery));
         }
+
+        public async Task AddReply(PostReply reply)
+        {
+            _context.PostReplies.Add(reply);
+            await _context.SaveChangesAsync();
+        }
     }
 }

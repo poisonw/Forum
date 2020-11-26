@@ -1,0 +1,47 @@
+﻿@model Forum.Models.Reply.PostReplyModel
+
+<div class="container body-content">
+    <div class="sectionHeader">
+        <div class="sectionHeading">
+            Відповідь | @Model.PostTitle
+        </div>
+        <div class="forumLogo" style="background-image: url(@Model.ForumImageUrl)"></div>
+        <span id="headingBtn">
+            @Html.ActionLink("Назад до повідомлень", "Index", "Post", htmlAttributes: new { @class = "btn btn-back" })
+        </span>
+    </div>
+    <div class="row">
+        <div id="postReply">
+            <h3>
+                @Model.PostTitle
+            </h3>
+            <p>
+                @Model.PostContent
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div id="createReply">
+            <div class="authorBlock">
+                Ви відправляєте цю відповідь як @Model.AuthorName
+            </div>
+
+            @using (Html.BeginForm("AddReply", null, FormMethod.Post, new { id = "addPostForm" }))
+            {
+                @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ReplyContent) Відповідь:
+                    @Html.TextAreaFor(model => model.ReplyContent, 20, 0, new { @class = "form-control", @placeholder = "Ваша відповідь...." })
+                    <span>
+                        @Html.ValidationMessageFor(model => model.ReplyContent, null, new { @class = "text-danger" })
+                    </span>
+                </div>
+                <button type="submit" id="submitReplyBtn" class="btn btn-submitPost">Відправити відповідь</button>
+
+                @Html.HiddenFor(model => model.AuthorId);
+                @Html.HiddenFor(model => model.PostId);
+                @Html.HiddenFor(model => model.ForumId);
+            }
+        </div>
+    </div>
+</div>
