@@ -20,15 +20,14 @@ namespace Forum.Controllers
         private readonly IPost _postservice;
         private readonly IMyForum _myForumService;
        private static UserManager<ApplicationUser> _userManager;
-       
+        private readonly IApplicationUser _userService;
 
-        public PostController(IPost postService, IMyForum myForumService, UserManager<ApplicationUser> userManager)
+        public PostController(IPost postService, IMyForum myForumService, UserManager<ApplicationUser> userManager, IApplicationUser userService)
         {
             _postservice = postService;
             _myForumService = myForumService;
-             
             _userManager = userManager;
-            
+            _userService = userService;
         }
 
         public ActionResult Index(int id)
@@ -78,6 +77,7 @@ namespace Forum.Controllers
             var user =  await _userManager.FindByIdAsync(userId);
             var post = BuildPost(model, user);
             await _postservice.Add(post);
+            await _userService.UpdateUserRating(userId, typeof(Post));
             return RedirectToAction("Index", "Post", new { id = post.Id });
         }
 
