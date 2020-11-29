@@ -48,9 +48,10 @@ namespace Forum.Models
 
     public class LoginViewModel
     {
+
+
         [Required]
-        [Display(Name = "Назва користувача")]
-        
+        [Display(Name = "Логін користувача")]
         public string UserName { get; set; }
 
         [Required]
@@ -64,9 +65,10 @@ namespace Forum.Models
 
     public class RegisterViewModel
     {
+
         [Required]
         [EmailAddress]
-        [Display(Name = "Адрес электронной почты")]
+        [Display(Name = "Адреса електронно пошти")]
         public string Email { get; set; }
 
         [Required]
@@ -80,7 +82,7 @@ namespace Forum.Models
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
 
-                [Required]
+        [Required]
         [StringLength(20, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 3)]
         [Display(Name = "Назва користувача")]
         public string UserName { get; set; }

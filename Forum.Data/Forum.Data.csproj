@@ -151,6 +151,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\DataSeeder.cs" />
     <Compile Include="Models\MyForum.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\PostReply.cs" />
