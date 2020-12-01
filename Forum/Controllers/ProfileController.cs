@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Forum.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -61,6 +62,7 @@ namespace Forum.Controllers
             return RedirectToAction("Detail", "Profile", new { id = userId });
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var profiles = _userService.GetAll()

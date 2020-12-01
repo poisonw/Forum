@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Forum.Controllers
 {
+    [Authorize]
     public class ReplyController : Controller
     {
         private readonly IPost _postService;

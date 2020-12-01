@@ -56,11 +56,11 @@ namespace Forum.Controllers
             var forum = _myForumService.GetById(id);
             var posts = new List<Post>();
 
-                posts = _postService.GetFilteredPosts(forum, searchQuery).ToList();
-            
+            posts = _postService.GetFilteredPosts(forum, searchQuery).ToList();
 
 
-            
+
+
             var postListings = posts.Select(post => new PostListingModel
             {
                 Id = post.Id,
@@ -82,9 +82,9 @@ namespace Forum.Controllers
         [HttpPost]
         public ActionResult Search(int id, string searchQuery)
         {
-            return RedirectToAction("Topic", "Forum", new { id, searchQuery});
+            return RedirectToAction("Topic", "Forum", new { id, searchQuery });
         }
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var model = new AddForumModel();
@@ -92,6 +92,7 @@ namespace Forum.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> AddForum(AddForumModel model)
         {
             var imageUri = "/images/default.png";

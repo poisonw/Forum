@@ -15,6 +15,8 @@ using static Forum.Data.Models.ApplicationUser;
 
 namespace Forum.Controllers
 {
+
+    [Authorize]
     public class PostController : Controller
     {
         private readonly IPost _postservice;
@@ -56,7 +58,7 @@ namespace Forum.Controllers
         {
             return _userManager.GetRolesAsync(user.Id).Result.Contains("Admin");
         }
-
+        [Authorize]
         public ActionResult Create(int id)
         {
             var forum = _myForumService.GetById(id);
