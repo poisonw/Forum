@@ -251,6 +251,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\forum\cplusplus.png" />
     <Content Include="images\forum\cs.png" />
     <Content Include="images\forum\js.png" />
     <Content Include="images\forum\py.png" />

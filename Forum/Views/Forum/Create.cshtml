@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div id="createForumSection">
-            @using (Html.BeginForm("AddForm", null, FormMethod.Post, new { enctype = "multipart/form-data", id = "createForumForm" }))
+            @using (Html.BeginForm("AddForum", null, FormMethod.Post, new { enctype = "multipart/form-data", id = "createForumForm" }))
             {
                 @Html.ValidationSummary(true, null, new { @class = "text-danger" })
                 <div class="form-group">
@@ -19,7 +19,7 @@
                     </span>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Description) Опис форуму
+                    @Html.LabelFor(model => model.Description, "Опис форуму", null)
                     @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Короткий опис форуму...." })
                     <span>
                         @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
@@ -29,7 +29,7 @@
                     <label>Завантаження зображення для форуму</label>
                     <br />
                     <label class="btn btn-default btn-file">
-                        Знайти <input type="file" name="file" style="display: none" />
+                        Знайти <input type="file" name="ImageUpload" style="display: none" />
                     </label>
                 </div>
                 <button type="submit" id="newFormBtn" class="btn btn-submitPost">Створити форум</button>

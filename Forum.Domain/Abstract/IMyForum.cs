@@ -12,11 +12,12 @@ namespace Forum.Domain.Abstract
     {
         MyForum GetById(int id);
         IEnumerable<MyForum> GetAll();
-       // IEnumerable<ApplicationUser> GetAllActiveUsers();
 
         Task Create(MyForum myForum);
         Task Delete(int myForumId);
         Task UpdateForumTitle(int myForumId, string newTitle);
         Task UpdateForumDescription(int myForumId, string newDescription);
+        IEnumerable<ApplicationUser> GetActiveUsers(int id);
+        bool HasRecentPost(int id);
     }
 }

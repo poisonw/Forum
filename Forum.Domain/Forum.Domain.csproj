@@ -61,11 +61,9 @@
     <Compile Include="Abstract\IMyForum.cs" />
     <Compile Include="Abstract\IApplicationUser.cs" />
     <Compile Include="Abstract\IPost.cs" />
-    <Compile Include="Abstract\IUpload.cs" />
     <Compile Include="Concrete\ApplicationUserService.cs" />
     <Compile Include="Concrete\MyForumService.cs" />
     <Compile Include="Concrete\PostService.cs" />
-    <Compile Include="Concrete\UploadService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

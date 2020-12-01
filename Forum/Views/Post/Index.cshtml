@@ -35,7 +35,7 @@
     <div class="row" id="replyDivider"></div>
     @if (User.Identity.IsAuthenticated)
     {
-        <div class="row">
+        <div class="row" id="postReplyRow">
             <span>
                 @Html.ActionLink("Відповідь", "Create", "Reply", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-newReply" })
             </span>
@@ -50,12 +50,14 @@
                 <div class="col-md-3 replyAuthorContainer">
                     <div class="postAuthorImage" style="background-image: url(@reply.AuthorImageUrl)"></div>
                     @Html.ActionLink(reply.AuthorName, "Detail", "Profile", new { id = @reply.AuthorId })
+                    <br/>
                     @if (reply.IsAuthorAdmin)
                     {
                         <div class="isAdmin smaller">Admin</div>
                         <br />
                     }
-                    <span>@reply.Created</span>
+                    <br/>
+                    <span class="postDate" >@reply.Created</span>
                 </div>
                 <div class="col-md-9 replyContentContainer">
                     <div class="postContent">

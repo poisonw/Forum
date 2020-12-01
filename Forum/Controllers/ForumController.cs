@@ -37,12 +37,16 @@ namespace Forum.Controllers
                 {
                     Id = forum.Id,
                     Name = forum.Title,
-                    Description = forum.Description
+                    Description = forum.Description,
+                    NumberOfPosts = forum.Posts?.Count() ?? 0,
+                    NumberOfUsers = _myForumService.GetActiveUsers(forum.Id).Count(),
+                    ImageUrl = forum.ImageUrl,
+                    HasRecentPost = _myForumService.HasRecentPost(forum.Id)
                 });
 
             var model = new ForumIndexModel
             {
-                ForumList = forums
+                ForumList = forums.OrderBy(f => f.Name)
             };
             return View(model);
         }
@@ -90,7 +94,14 @@ namespace Forum.Controllers
         [HttpPost]
         public async Task<ActionResult> AddForum(AddForumModel model)
         {
-            var imageUri = "/images/users/default.png";
+            var imageUri = "/images/default.png";
+            
+            if (model.ImageUpload !=null)
+            {
+                imageUri = "/images/forum/" + model.ImageUpload.FileName;
+               var path = Server.MapPath("~" + imageUri);
+                model.ImageUpload.SaveAs(path);
+            }
 
             var forum = new MyForum
             {

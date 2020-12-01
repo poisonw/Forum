@@ -206,6 +206,11 @@
     padding: 8px 8px 24px 24px;
 }
 
+#replyDivider {
+height: 2px;
+margin-bottom: 12px;
+}
+
 #headingBtn {
     float: right;
     margin-right: 20px;
@@ -374,11 +379,72 @@
     font-family: 'Roboto';
     font-size: 1.7em;
 }
+/*Create Post*/
 
 .createPostSection {
     background-color: #fff;
     padding: 24px;
 }
+
+.authorBlock {
+    padding: 18px;
+    border: 1px dashed #00AFCF;
+    margin-bottom: 8px;
+}
+.noBorder
+{
+    border: none;
+}
+#postTitle {
+border-right:none ;
+}
+
+/*User Profile Index*/
+.userProfilePic {
+    height: 40px;
+    width: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+/*Replies*/
+
+.replyContent {
+    display: table;
+    background-color: #fff;
+    border-bottom: 1px solid #aaa;
+    width: inherit;
+    
+}
+
+#postReplyRow {
+    background-color: #3F51B5;
+    padding: 8px;
+}
+
+.replyContentContainer, .replyAuthorContainer {
+   display: table-cell;
+   padding: 12px;
+}
+
+.isAdmin {
+display: inline-block;
+padding: 3px;
+background-color: #FFEB3B;
+color: #000;
+font-family: 'Roboto Mono';
+}
+
+.smaller {
+font-size: 0.8em;
+}
+#originalPost {
+    background-color: #fff;
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

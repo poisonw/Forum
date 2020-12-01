@@ -11,7 +11,7 @@
         </span>
     </div>
     <div class="row">
-        <div id="postReply">
+        <div id="originalPost">
             <h3>
                 @Model.PostTitle
             </h3>
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="row">
-        <div id="createReply">
+        <div class="createPostSection">
             <div class="authorBlock">
                 Ви відправляєте цю відповідь як @Model.AuthorName
             </div>
@@ -31,7 +31,7 @@
                 @Html.ValidationSummary(true, null, new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(model => model.ReplyContent) Відповідь:
-                    @Html.TextAreaFor(model => model.ReplyContent, 20, 0, new { @class = "form-control", @placeholder = "Ваша відповідь...." })
+                    @Html.TextAreaFor(model => model.ReplyContent, 20, 0, new { @class = "form-control", @placeholder = "Ваша відповідь....", @id = "replyContent" })
                     <span>
                         @Html.ValidationMessageFor(model => model.ReplyContent, null, new { @class = "text-danger" })
                     </span>

@@ -18,14 +18,17 @@ namespace Forum.Domain.Concrete
         {
             _context = context;
         }
-        public Task Create(MyForum myForum)
+        public async Task Create(MyForum myForum)
         {
-            throw new NotImplementedException();
+            _context.MyForums.Add(myForum);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Delete(int myForumId)
+        public async Task Delete(int myForumId)
         {
-            throw new NotImplementedException();
+            var forum = GetById(myForumId);
+            _context.MyForums.Remove(forum);
+            await _context.SaveChangesAsync();
         }
 
 
@@ -33,12 +36,21 @@ namespace Forum.Domain.Concrete
         public IEnumerable<MyForum> GetAll()
         {
             
-             return _context.MyForums.Include(f => f.Posts);
+             return _context.MyForums.Include(f => f.Posts).ToList();
         }
 
-        public IEnumerable<ApplicationUserService> GetAllActiveUsers()
+        public IEnumerable<ApplicationUser> GetActiveUsers(int id)
         {
-            throw new NotImplementedException();
+            var posts = GetById(id).Posts;
+
+           if (posts != null || !posts.Any())
+           {
+                var postUsers = posts.Select(p => p.User);
+                var replyUsers = posts.SelectMany(p => p.Replies).Select(r => r.User);
+
+                return postUsers.Union(replyUsers).Distinct();
+            }
+            return new List<ApplicationUser>();
         }
 
         public MyForum GetById(int id)
@@ -47,7 +59,15 @@ namespace Forum.Domain.Concrete
                           .Include(p => p.Posts.Select(u => u.User))
                           .Include(p => p.Posts.Select(r => r.Replies.Select(u => u.User)))
                           .FirstOrDefault();
+            
             return forum;
+        }
+
+        public bool HasRecentPost(int id)
+        {
+            const int hoursAgo = 12;
+            var window = DateTime.Now.AddDays(-hoursAgo);
+            return GetById(id).Posts.Any(post => post.Created > window);
         }
 
         public Task UpdateForumDescription(int myForumId, string newDescription)
@@ -78,6 +98,8 @@ namespace Forum.Domain.Concrete
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+
     }
 
 }

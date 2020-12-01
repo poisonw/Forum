@@ -46,7 +46,7 @@ namespace Forum
            kernel.Unbind<ModelValidatorProvider>();
             kernel.Bind<IApplicationUser>().To<ApplicationUserService>();
 
-           kernel.Bind<IUpload>().To<UploadService>();
+           
            kernel.Get<DataSeeder>().SeedSuperUser().Wait();
             
             
